@@ -66,12 +66,16 @@ export default function formatLocale(locale) {
     "g": formatYearISO,
     "G": formatFullYearISO,
     "H": formatHour24,
-    "I": formatHour12,
+    "I": (d, p) => {
+      return locale_periods.length > 1 ? formatHour12(d, p) : formatHour24(d, p);
+    },
     "j": formatDayOfYear,
     "L": formatMilliseconds,
     "m": formatMonthNumber,
     "M": formatMinutes,
-    "p": formatPeriod,
+    "p": (d) => {
+      return locale_periods.length === 2 ? formatPeriod(d) : locale_periods[0];
+    },
     "q": formatQuarter,
     "Q": formatUnixTimestamp,
     "s": formatUnixTimestampSeconds,
@@ -101,12 +105,16 @@ export default function formatLocale(locale) {
     "g": formatUTCYearISO,
     "G": formatUTCFullYearISO,
     "H": formatUTCHour24,
-    "I": formatUTCHour12,
+    "I": (d, p) => {
+      return locale_periods.length > 1 ? formatUTCHour12(d, p) : formatUTCHour24(d, p);
+    },
     "j": formatUTCDayOfYear,
     "L": formatUTCMilliseconds,
     "m": formatUTCMonthNumber,
     "M": formatUTCMinutes,
-    "p": formatUTCPeriod,
+    "p": (d) => {
+      return locale_periods.length === 2 ? formatUTCPeriod(d) : locale_periods[0];
+    },
     "q": formatUTCQuarter,
     "Q": formatUnixTimestamp,
     "s": formatUnixTimestampSeconds,
